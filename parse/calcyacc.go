@@ -14,7 +14,7 @@ type yySymType struct {
 	result Result
 }
 
-const NUMBER = 57346
+const NUM = 57346
 
 var yyToknames = [...]string{
 	"$end",
@@ -26,7 +26,7 @@ var yyToknames = [...]string{
 	"'/'",
 	"'('",
 	"')'",
-	"NUMBER",
+	"NUM",
 }
 
 var yyStatenames = [...]string{}

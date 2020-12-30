@@ -41,11 +41,11 @@ func (l *lex) Lex(lval *yySymType) int {
 		case scanner.Int:
 			i, _ := strconv.Atoi(text)
         	lval.result = Result(i)
-        	return	NUMBER
+        	return	NUM
 		case scanner.Float:
 			val, _ := strconv.ParseFloat(text, 64)
 			lval.result = Result(val)
-			return	NUMBER
+			return	NUM
 		default:
 			return  int(tok)
 	}

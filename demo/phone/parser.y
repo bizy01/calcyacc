@@ -17,7 +17,7 @@ func setResult(l yyLexer, v Result) {
 
 main: phone
   {
-    setResult(yylex, 0)
+    setResult(yylex, $1)
   }
 
 phone:

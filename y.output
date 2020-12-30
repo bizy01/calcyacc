@@ -1,0 +1,162 @@
+
+state 0
+	$accept: .main $end 
+
+	'('  shift 6
+	NUM  shift 5
+	.  error
+
+	expression  goto 2
+	term  goto 3
+	factor  goto 4
+	main  goto 1
+
+state 1
+	$accept:  main.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	main:  expression.    (1)
+	expression:  expression.'+' term 
+	expression:  expression.'-' term 
+
+	'+'  shift 7
+	'-'  shift 8
+	.  reduce 1 (src line 23)
+
+
+state 3
+	expression:  term.    (4)
+	term:  term.'*' factor 
+	term:  term.'/' factor 
+
+	'*'  shift 9
+	'/'  shift 10
+	.  reduce 4 (src line 32)
+
+
+state 4
+	term:  factor.    (7)
+
+	.  reduce 7 (src line 38)
+
+
+state 5
+	factor:  NUM.    (8)
+
+	.  reduce 8 (src line 40)
+
+
+state 6
+	factor:  '('.expression ')' 
+
+	'('  shift 6
+	NUM  shift 5
+	.  error
+
+	expression  goto 11
+	term  goto 3
+	factor  goto 4
+
+state 7
+	expression:  expression '+'.term 
+
+	'('  shift 6
+	NUM  shift 5
+	.  error
+
+	term  goto 12
+	factor  goto 4
+
+state 8
+	expression:  expression '-'.term 
+
+	'('  shift 6
+	NUM  shift 5
+	.  error
+
+	term  goto 13
+	factor  goto 4
+
+state 9
+	term:  term '*'.factor 
+
+	'('  shift 6
+	NUM  shift 5
+	.  error
+
+	factor  goto 14
+
+state 10
+	term:  term '/'.factor 
+
+	'('  shift 6
+	NUM  shift 5
+	.  error
+
+	factor  goto 15
+
+state 11
+	expression:  expression.'+' term 
+	expression:  expression.'-' term 
+	factor:  '(' expression.')' 
+
+	'+'  shift 7
+	'-'  shift 8
+	')'  shift 16
+	.  error
+
+
+state 12
+	expression:  expression '+' term.    (2)
+	term:  term.'*' factor 
+	term:  term.'/' factor 
+
+	'*'  shift 9
+	'/'  shift 10
+	.  reduce 2 (src line 28)
+
+
+state 13
+	expression:  expression '-' term.    (3)
+	term:  term.'*' factor 
+	term:  term.'/' factor 
+
+	'*'  shift 9
+	'/'  shift 10
+	.  reduce 3 (src line 30)
+
+
+state 14
+	term:  term '*' factor.    (5)
+
+	.  reduce 5 (src line 34)
+
+
+state 15
+	term:  term '/' factor.    (6)
+
+	.  reduce 6 (src line 36)
+
+
+state 16
+	factor:  '(' expression ')'.    (9)
+
+	.  reduce 9 (src line 42)
+
+
+10 terminals, 5 nonterminals
+10 grammar rules, 17/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+54 working sets used
+memory: parser 12/120000
+14 extra closures
+23 shift entries, 1 exceptions
+9 goto entries
+4 entries saved by goto default
+Optimizer space used: output 18/120000
+18 table entries, 0 zero
+maximum spread: 10, maximum offset: 10

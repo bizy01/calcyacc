@@ -14,7 +14,7 @@
 
 %type <result> expression term factor
 %token '+' '-' '*' '/' '(' ')'
-%token <result> NUMBER
+%token <result> NUM
 
 %start main
 
@@ -37,7 +37,7 @@ term       : term '*' factor
                 { $$ = $1 / $3 }
            | factor
                 { $$ = $1 }
-factor     : NUMBER
+factor     : NUM
                 { $$ = $1 }
            | '(' expression ')'
                 { $$ = $2 }
